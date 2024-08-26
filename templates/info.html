@@ -1,0 +1,176 @@
+<!-- templates/info.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>查询数据</title>
+  <meta name="keywords" content="index">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+  <link rel="stylesheet" href="/static/assets/css/admin.css">
+  <link rel="stylesheet" href="/static/assets/css/app.css">
+  <!--<link rel="stylesheet" href="/static/css/style.css">-->
+  <style>/* 重置样式 */
+/* Style for the form */
+/* 重置样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 页面整体布局 */
+
+
+/* 修改密码块 */
+.change-password {
+  width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 标题 */
+h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  text-align:center;
+}
+
+/* 表单 */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+/* 输入框 */
+input {
+  width: 100%;
+  height: 30px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 3px;
+}
+
+/* 提交按钮 */
+input[type="submit"] {
+  width: 100px;
+  height: 30px;
+  background-color: #0099ff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+
+      
+      /* Write your styles */
+    </style>
+</head>
+<body>
+    <header class="am-topbar am-topbar-inverse admin-header">
+        
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="/static/assets/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+        
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                
+                
+            </ul>
+        </div>
+    </header>
+  <main>
+    <section class="sidebar">
+        <div class="tpl-page-container tpl-page-header-fixed">
+                
+        </div>
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                功能列表
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        <a href="/" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>退出登录</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/info" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>知乎爬取数据展示与检索</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/echarts1" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>提问描述数据可视化</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/echarts2" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>所有数据可视化</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/echarts3" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>订阅和观看数对比</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/guanli" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>用户管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/amazeui.min.js"></script>
+        <script src="/static/js/app.js"></script>
+    </section>
+    <div class="change-password">
+    <h1>用户管理</h1>
+    <form method="post">
+        <label for="username">用户名：</label>
+        <input type="text" id="username" name="username" placeholder="输入您登陆的用户名" required><br>
+        <label for="old_password">原密码：</label>
+        <input type="password" id="old_password" name="old_password" placeholder="输入您登陆的密码" required><br>
+        <label for="new_password">新密码：</label>
+        <input type="password" id="new_password" name="new_password" placeholder="输入您想要修改的密码" required><br>
+        <label for="old_email">原邮箱：</label>
+        <input type="password" id="old_email" name="old_email" placeholder="输入您登陆的邮箱" required><br>
+        <label for="new_email">新邮箱：</label>
+        <input type="password" id="new_email" name="new_email" placeholder="输入您想要修改的邮箱" required><br>
+        <input type="submit" value="修改">
+    </div>
+  </main>
+</body>
+</html>
+

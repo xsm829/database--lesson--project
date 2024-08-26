@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <style>
+        body {
+            background-image: url('static/assets/background.jpg'); /* Add your background image URL here */
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+        }
+        .registration-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .registration-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .registration-container input[type="text"],
+        .registration-container input[type="password"],
+        .registration-container input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .registration-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .registration-container a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h1>知乎话题——健身增肌，养身健身
+            数据爬取、预处理和可视化</h1>
+        <h2 align="center">注册</h2>
+        <form name="frm" id="frm" action="" method="post">
+            <div>用户<input type="text" name="user" id="user"></div>
+            <div>密码<input type="password" name="pwd1" id="pwd1"></div>
+            <div>确认密码<input type="password" name="pwd2" id="pwd2"></div>
+            <div>邮箱<input type="email" name="email" id="email"></div>
+            <div><input type="submit" value="注册"></div>
+        </form>
+        <a href="/">登录</a>
+    </div>
+    <div align="center">{{msg}}</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>查询数据</title>
+  <meta name="keywords" content="index">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+  <link rel="stylesheet" href="/static/assets/css/admin.css">
+  <link rel="stylesheet" href="/static/assets/css/app.css">
+  <!--<link rel="stylesheet" href="/static/css/style.css">-->
+  <style>/* 重置样式 */
+/* Style for the form */
+
+.content {
+        margin-left: 25%;
+        width: 75%;
+      }
+    
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align content to the right */
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+td button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* Additional styling for buttons */
+td button:hover {
+    background-color: #0056b3;
+}
+
+      
+      /* Write your styles */
+    </style>
+</head>
+<body>
+    <header class="am-topbar am-topbar-inverse admin-header">
+        
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="/static/assets/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+        
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                
+                
+            </ul>
+        </div>
+    </header>
+  <main>
+    <section class="sidebar">
+        <div class="tpl-page-container tpl-page-header-fixed">
+                
+        </div>
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                功能列表
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                   <li class="tpl-left-nav-item">
+                        <a href="/" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>退出登录</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/info" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>知乎爬取数据展示与检索</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/echarts1" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>提问描述数据可视化</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/echarts2" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>所有数据可视化</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/echarts3" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>订阅和观看数对比</span>
+                        </a>
+                    </li>
+                    <li class="tpl-left-nav-item">
+                        <a href="/guanli" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>用户管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/amazeui.min.js"></script>
+        <script src="/static/js/app.js"></script>
+    </section>
+    <section class="content">
+        <form method="post" action="{{url_for('search')}}">
+
+            <input type="text" name="content" id="content" placeholder="请输入搜索次序（序号）">
+        
+            <input type="submit" value="搜索">
+        
+        </form>
+      <table>
+        <thead>
+          <tr>
+            <th>链接</th>
+            <th>提问标题</th>
+            <th>提问简介</th>
+            <th>订阅人数</th>
+            <th>查看量</th>
+            <th>点赞数</th>
+            <th>关键词1</th>
+            <th>关键词2</th>
+            <th>关键词3</th>
+            <th>关键词4</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in items %}
+          <tr>
+            <td>{{ i.url }}</td>
+            <td>{{ i.question_title }}</td>
+            <td>{{ i.question_text}}</td>
+            <td>{{ i.followers}}</td>
+            <td>{{ i.views}}</td>
+            <td>{{ i.likes}}</td>
+            <td>{{ i.topics1}}</td>
+            <td>{{ i.topics2}}</td>
+            <td>{{ i.topics3}}</td>
+            <td>{{ i.topics4}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

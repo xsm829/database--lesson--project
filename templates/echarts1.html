@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <meta charset="utf-8"/>
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <!-- 引入 jQuery 库 -->
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+    <script src="static/assets/js/echarts.min.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        background-color: white;
+    }
+
+    #title {
+        position: absolute;
+        width: 40%;
+        height: 10%;
+        top: 0%;
+        left: 30%;
+        background: #666666;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+    }
+
+    #main {
+        position: absolute;
+        width: 40%;
+        height: 40%;
+        top: 10%;
+        left: 30%;
+        background: #46a9be;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+    }
+
+    #cpu {
+        position: absolute;
+        width: 30%;
+        height: 40%;
+        top: 10%;
+        left: 0%;
+        background: #48dada;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+    }
+
+    #time {
+        position: absolute;
+        /* width: 30%; */
+        height: 10%;
+        top: 5%;
+        right: 2%;
+        color: #1ec5e2;
+        font-size: 20px;
+        /* background: green; */
+    }
+
+    #disk {
+        position: absolute;
+        width: 30%;
+        height: 40%;
+        top: 10%;
+        right: 0%;
+        background: #48dada;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+
+    }
+
+    #network {
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        top: 50%;
+        right: 0%;
+        background-color: #dea594;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+
+    }
+    #main1{
+            width: 1000px;
+            height: 600px;
+            background-color: rgb(70, 245, 128);
+    }
+</style>
+<body onload="showTime()">
+<div id="title">提问描述可视化分析</div>
+<div id="time"></div>
+<script>
+    function showTime() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1; // getMonth() 返回的月份是从0开始的，所以需要+1
+        var day = date.getDate();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+
+        // 使用 'padStart' 函数来确保每个部分都是两位数
+        month = month.toString().padStart(2, '0');
+        day = day.toString().padStart(2, '0');
+        hour = hour.toString().padStart(2, '0');
+        minute = minute.toString().padStart(2, '0');
+        second = second.toString().padStart(2, '0');
+
+        var formattedDate = year + '年' + month + '月' + day + '日，' + hour + '时' + minute + '分' + second + '秒';
+        document.getElementById("time").innerHTML = formattedDate;
+    }
+
+    setInterval(showTime, 1000);
+
+</script>
+<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+<div id="main"></div>
+    <div id="network"></div>
+    <script type="text/javascript">
+            // 基于准备好的dom，初始化 echarts 实例并绘制图表。
+            var myChart=echarts.init(document.getElementById('network'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: ''
+                },
+                tooltip: {},
+                legend: {
+                    data:['词频']
+                },
+                dataZoom: [{
+                          type: 'slider',
+                          show: true, //flase直接隐藏图形
+                          xAxisIndex: [0],
+                          left: '9%', //滚动条靠左侧的百分比
+                          bottom: -5,
+                          start: 5,//滚动条的起始位置
+                          end: 30 //滚动条的截止位置（按比例分割你的柱状图x轴长度）
+                      }],
+                xAxis: {
+                    name:"词语",
+                    type: 'category',
+                    data:[
+                    		{% for item in items %}
+                            	"{{ item[0]}}",
+                        	{% endfor %}
+                       ]},
+                yAxis: {
+                    name:"词频",
+                    type: 'value',
+                    axisLabel : {
+                    formatter: '{value}'}
+                },
+                series: [
+                        {
+                            type: 'line',	//line折线图。bar柱形图
+                            data:[{% for item in items %}
+                            		"{{ item[1]}}",
+                        			{% endfor %}],
+                            itemStyle:{normal: {color:"#31b0d5"}}
+                        }
+                    ]
+                };
+            myChart.setOption(option);// 基于准备好的dom，初始化 echarts 实例并绘制图表。
+     </script>
+<div id="cpu"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('cpu'));
+ 
+        // 指定图表的配置项和数据
+        var option = {
+  title: {
+    text: '情感分析占比',
+    left: 'center',
+  },
+  series: [
+    {
+      name: '情感分析',
+      type: 'pie',
+      radius: '50%',
+      center: ['50%', '50%'],
+      data: [
+        {% for data in datas %}
+        {value:{{ datas[data] }}, name: '{{data}}'},
+        {% endfor %}
+      ],
+      label: {
+        formatter: '{b}: ({c}%)',
+      },
+    },
+  ],
+};
+
+
+
+
+        myChart.setOption(option);
+    </script>
+
+<div id="disk"></div>
+<img id="disk" src="static/assets/img/提问描述词频.png" alt="">
+<div id="main" align="center">
+欢迎您访问此页面，左侧为词语情感分析，下面为词频统计图，右侧为词云图
+</div>
+</body>
+<html>

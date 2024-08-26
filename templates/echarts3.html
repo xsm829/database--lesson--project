@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <meta charset="utf-8"/>
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <!-- 引入 jQuery 库 -->
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+    <script src="static/assets/js/echarts.min.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        background-color: white;
+    }
+
+    #title {
+        position: absolute;
+        width: 40%;
+        height: 10%;
+        top: 0%;
+        left: 30%;
+        background: #666666;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+    }
+
+
+
+    #cpu {
+        position: absolute;
+        width: 100%;
+        height: 80%;
+        top: 10%;
+        left: 0%;
+        background: #48dada;
+        color: white;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold; /* 加粗字体 */
+        border-radius: 10px; /* 增加圆润感 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 增加一些阴影，增加科技感 */
+    }
+
+    #time {
+        position: absolute;
+        /* width: 30%; */
+        height: 10%;
+        top: 5%;
+        right: 2%;
+        color: #1ec5e2;
+        font-size: 20px;
+        /* background: green; */
+    }
+
+    #main1{
+            width: 1000px;
+            height: 600px;
+            background-color: rgb(70, 245, 128);
+    }
+</style>
+<body onload="showTime()">
+<div id="title">订阅和观看数对比</div>
+<div id="time"></div>
+<script>
+    function showTime() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1; // getMonth() 返回的月份是从0开始的，所以需要+1
+        var day = date.getDate();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+
+        // 使用 'padStart' 函数来确保每个部分都是两位数
+        month = month.toString().padStart(2, '0');
+        day = day.toString().padStart(2, '0');
+        hour = hour.toString().padStart(2, '0');
+        minute = minute.toString().padStart(2, '0');
+        second = second.toString().padStart(2, '0');
+
+        var formattedDate = year + '年' + month + '月' + day + '日，' + hour + '时' + minute + '分' + second + '秒';
+        document.getElementById("time").innerHTML = formattedDate;
+    }
+
+    setInterval(showTime, 1000);
+
+</script>
+<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+<div id="cpu"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化 echarts 实例并绘制图表。
+    var myChart=echarts.init(document.getElementById('cpu'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip: {},
+        legend: {
+            data:['订阅和观看数对比']
+        },
+        dataZoom: [{
+                  type: 'slider',
+                  show: true, //flase直接隐藏图形
+                  xAxisIndex: [0],
+                  left: '9%', //滚动条靠左侧的百分比
+                  bottom: -5,
+                  start: 5,//滚动条的起始位置
+                  end: 30 //滚动条的截止位置（按比例分割你的柱状图x轴长度）
+              }],
+        xAxis: {
+            name:"订阅数",
+            type: 'category',
+            data:[
+                    {% for result in results %}
+                        "{{ result[3]}}",
+                    {% endfor %}
+               ]},
+        yAxis: {
+            name:"观看数",
+            type: 'value',
+            axisLabel : {
+            formatter: '{value}'}
+        },
+        series: [
+                {
+                    type: 'bar',	//line折线图。bar柱形图
+                    data:[{% for result in results %}
+                            "{{ result[4]}}",
+                            {% endfor %}],
+                    itemStyle:{normal: {color:"#31b0d5"}}
+                }
+            ]
+        };
+    myChart.setOption(option);// 基于准备好的dom，初始化 echarts 实例并绘制图表。
+</script>
+
+
+</body>
+<html>

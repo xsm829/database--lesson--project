@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/admin.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <style>
+        body {
+            background-image: url('static/assets/background.jpg'); 
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .login-container a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .register {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #00ff2a;
+            text-decoration: none;
+        }  
+        #msg {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #ff0059;
+            text-decoration: none;
+        }      
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>知乎话题——健身增肌，养身健身
+            数据爬取、预处理和可视化</h1>
+        <h2 align="center">登录</h2>
+        <form name="frm" id="frm" action="" method="post">
+            <div>用户<input type="text" name="user" id="user"></div>
+            <div>密码<input type="password" name="pwd" id="pwd"></div>
+            <div><input type="submit" value="登录"></div>
+        </form>
+        <a href="/login">忘记密码？</a>
+    </div>
+    <div class="register"><a href="/register"><button>注册</button></a></div>
+    <div id="msg" align="center">{{msg}}</div>
+</body>
+</html>
+
